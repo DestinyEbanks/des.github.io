@@ -1,140 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Lista de Tareas pendientes</title>
-    <link rel="stylesheet"  href="estilo.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Invitación</title>
     <style>
         body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    font-size: 15px;
-    margin-bottom: 15px;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50vh;
-    background-color: palevioletred; 
-    margin: 0;
-
+    min-height: 100vh;
 }
 
-.container {
+.carta {
+    background-color: white;
     width: 300px;
-    margin: 0 auto;
-}
-
-ul {
-    list-style-type: decimal;
     padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-li {
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-}
-
-li.completed {
-    text-decoration: line-through;
-}
-
-
-
-button {
-    margin-right: 0px;
-    background-color: aqua;
-    padding: 15px;
-}
-
-
-.large-input {
-    width: 100%;
+.encabezado {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.add-button {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20;
+h1 {
+    font-size: 20px;
 }
 
-input[type="date"],
-input[type="text"] {
-    width: 100%;
-    margin-bottom: 20px; 
-    padding: 20px; 
+.contenido p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.address {
+    font-style: normal;
+}
+
+.fecha, .hora {
+    font-weight: bold;
+}
+
+.firma {
+    margin-top: 20px;
+    text-align: right;
+}
+
+p {
+    font-size: 14px;
+    margin: 0;
 }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Lista de Tareas</h1>
-        <div class="input-container">
-            <input type="text" id="task" placeholder="Nueva tarea" class="large-input">
-            <input type="date" id="dueDate" class="large-input" placeholder="Fecha de vencimiento">
-            <button class="add-button" onclick="addTask()">Agregar</button>
+    <div class="carta">
+        <div class="encabezado">
+            <h1>Invitación a un Evento Especial</h1>
         </div>
-        <ul id="taskList"></ul>
+        <div class="contenido">
+            <p>Estás cordialmente invitado  a mi cumpleaños  que se llevará a cabo en la siguiente ubicación:</p>
+            <address>
+               Hotel palma Real<br>
+                La ceiba, Atlantida<br>
+            </address>
+            <p>La fecha y hora del evento son las siguientes:</p>
+            <p class="fecha">Fecha: 01 de noviembre de 2023</p>
+            <p class="hora">Hora: 18:00</p>
+            <p>Esperamos contar con tu presencia en este evento especial. ¡No faltes!</p>
+        </div>
+        <div class="firma">
+            <p>Atentamente,</p>
+            <p>Destiny Ebanks</p>
+        </div>
     </div>
-
-    <script>
-        const taskList = [];
-
-function addTask() {
-    const taskInput = document.getElementById("task");
-    const dueDateInput = document.getElementById("dueDate");
-    const taskText = taskInput.value.trim();
-    const dueDate = dueDateInput.value;
-
-    if (taskText !== "") {
-        taskList.push({ text: taskText, dueDate: dueDate, completed: false });
-        taskInput.value = "";
-        dueDateInput.value = "";
-        displayTasks();
-    }
-}
-
-function displayTasks() {
-    const taskListElement = document.getElementById("taskList");
-    taskListElement.innerHTML = "";
-
-    taskList.forEach((task, index) => {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<strong>Tarea:</strong> ${task.text}<br>
-                             <strong>Fecha de Vencimiento:</strong> ${task.dueDate}`;
-
-        if (task.completed) {
-            listItem.innerHTML += "<br><strong>Estado:</strong> Completada";
-        }
-
-        const completeButton = document.createElement("button");
-        completeButton.textContent = task.completed ? "Reabrir" : "Completar";
-        completeButton.addEventListener("click", () => toggleTaskCompletion(index));
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Eliminar";
-        deleteButton.addEventListener("click", () => deleteTask(index));
-
-        listItem.appendChild(completeButton);
-        listItem.appendChild(deleteButton);
-
-        taskListElement.appendChild(listItem);
-    });
-}
-
-function toggleTaskCompletion(index) {
-    taskList[index].completed = !taskList[index].completed;
-    displayTasks();
-}
-
-function deleteTask(index) {
-    taskList.splice(index, 1);
-    displayTasks();
-}
-
-displayTasks();
-    </script>
 </body>
 </html>
